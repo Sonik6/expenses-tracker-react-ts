@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import BudgetMonitor from "./BudgetMonitor";
+import BudgetForm from "./BudgetForm";
+import Modal from "react-bootstrap/Modal";
 
 interface Expense {
   description: string;
@@ -12,6 +14,8 @@ const ExpensesTracker: React.FC = () => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState(0);
   const [budget, setBudget] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const totalExpenses = expenses.reduce((acc, cur) => acc + cur.amount, 0);
 
   // *** Functions ***//
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,42 +29,33 @@ const ExpensesTracker: React.FC = () => {
     setExpenses(expenses.filter((_, i) => i !== index));
   };
 
-  const handleBudgetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBudget(Number(e.target.value));
+  const handleBudgetChange = (budget: number) => {
+    setBudget(budget);
   };
 
-  const totalExpenses = expenses.reduce((acc, cur) => acc + cur.amount, 0);
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
 
   //*** Return ***//
   return (
-    <div className="bg-white p-4 m-24 flex flex-col">
-      <form className="mb-4" onSubmit={handleBudgetChange}>
-        <label className="block mb-2 ">
-          <span className="text-gray-700 text-2xl p-2">Budget:</span>
-          <input
-            className="border border-gray-400 p-2 w-1/3"
-            type="number"
-            onChange={handleBudgetChange}
-            value={budget}
-          />
-        </label>
-      </form>
+    <div className="">
       <BudgetMonitor budget={budget} totalExpenses={totalExpenses} />
 
       <form onSubmit={handleSubmit}>
         <label>
           Description:
           <input
-            className="border border-gray-400 p-2 w-1/3"
+            className=""
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
         <label>
-          <span className="text-gray-700">Amount:</span>
+          <span className="">Amount:</span>
           <input
-            className="border border-gray-400 p-2 w-1/3"
+            className=""
             type="number"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
