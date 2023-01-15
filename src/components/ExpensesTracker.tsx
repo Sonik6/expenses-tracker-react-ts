@@ -73,6 +73,15 @@ const ExpensesTracker: React.FC = () => {
           </>
         ))}
       </ul>
+      <button onClick={handleModal}>Set Budget</button>
+      <Modal show={showModal} onHide={handleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Set Budget</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <BudgetForm onSubmit={handleBudgetChange} onClose={handleModal} />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
