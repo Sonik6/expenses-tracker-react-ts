@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BudgetMonitor from "./BudgetMonitor";
 import BudgetForm from "./BudgetForm";
 import Modal from "react-bootstrap/Modal";
-
+import "../style.css";
 interface Expense {
   description: string;
   amount: number;
@@ -39,29 +39,29 @@ const ExpensesTracker: React.FC = () => {
 
   //*** Return ***//
   return (
-    <div className="">
+    <div className="bg-slate-200 h-screen">
       <BudgetMonitor budget={budget} totalExpenses={totalExpenses} />
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex justify-center items-center">
         <label>
-          Description:
+          <span className="font-medium text-lg">Description</span>
           <input
-            className=""
+            className="m-5"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
         <label>
-          <span className="">Amount:</span>
+          <span className="font-medium text-lg">Amount:</span>
           <input
-            className=""
+            className="m-5"
             type="number"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
           />
         </label>
-        <button type="submit">Add Expense</button>
+        <button type="submit" className="font-medium bg-green-300 border p-2 text-white rounded-md">Add Expense</button>
       </form>
       <ul>
         {expenses.map((expense, index) => (

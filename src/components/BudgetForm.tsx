@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
 interface BudgetFormProps {
-  onSubmit: (budget: number) => void;
   onClose: () => void;
+  onSubmit: (budget: number) => void;
 }
 
-const BudgetForm: React.FC<BudgetFormProps> = ({ onSubmit }) => {
+const BudgetForm: React.FC<BudgetFormProps> = ({ onSubmit, onClose }) => {
   const [budget, setBudget] = useState(0);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(budget);
     setBudget(0);
-    onclose();
+    onClose();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="">
       <label>
         Budget:
         <input
