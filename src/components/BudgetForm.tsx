@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Button, Modal } from "react-bootstrap";
 interface BudgetFormProps {
   onClose: () => void;
   onSubmit: (budget: number) => void;
@@ -16,17 +16,25 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onSubmit, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="">
-      <label>
-        Budget:
-        <input
-          type="number"
-          value={budget}
-          onChange={(e) => setBudget(Number(e.target.value))}
-        />
-      </label>
-      <button type="submit">Set Budget</button>
-    </form>
+    <div>
+      <Modal.Body>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Budget:
+            <input
+              type="number"
+              value={budget}
+              onChange={(e) => setBudget(Number(e.target.value))}
+            />
+          </label>
+          <Modal.Footer>
+            <button type="submit" className="btn btn-primary">
+              Set Budget
+            </button>
+          </Modal.Footer>
+        </form>
+      </Modal.Body>
+    </div>
   );
 };
 
